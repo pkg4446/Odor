@@ -1,0 +1,14 @@
+{
+  "name": "odor",
+  "version": "1.0.0",
+  "description": "odor_log",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mqtt": "^4.3.7"
+  }
+}
