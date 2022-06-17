@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-module.exports = class StinkGPS extends Sequelize.Model{
+module.exports = class Contribute extends Sequelize.Model{
     static init(sequelize) {
         return super.init({
             IDX: {
@@ -9,30 +9,10 @@ module.exports = class StinkGPS extends Sequelize.Model{
                 autoIncrement: true
             },
 
-            FRMH_ID: {
-                type: Sequelize.STRING(100),
+            USER_ID: {
+                type: Sequelize.STRING(32),
                 allowNull: false,
                 unique: true,
-            },
-
-            AMN: {
-                type: Sequelize.UNSIGNED.SMALLINT,
-                allowNull: false,
-            },
-
-            HYD_SLF: {
-                type: Sequelize.UNSIGNED.SMALLINT,
-                allowNull: false,
-            },
-
-            MTHN: {
-                type: Sequelize.UNSIGNED.SMALLINT,
-                allowNull: false,
-            },
-
-            VOCS: {
-                type: Sequelize.UNSIGNED.SMALLINT,
-                allowNull: false,
             },
 
             //위도
@@ -46,12 +26,18 @@ module.exports = class StinkGPS extends Sequelize.Model{
                 allowNull: false,
             },
 
+            TMST: {
+                type: Sequelize.DATE,
+                allowNull: false,
+                defaultValue: Sequelize.NOW
+            }, 
+
         },{
             sequelize,
             timestamps : true,
             underscored: false,
-            modelName  : 'StinkGPS',
-            tableName  : 'stink_gps',
+            modelName  : 'Contribute',
+            tableName  : 'contribute',
             paranoid   : true,
             charset    : 'utf8',
             collate    : 'utf8_general_ci', 
