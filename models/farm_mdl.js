@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-module.exports = class Area_MDL extends Sequelize.Model{
+module.exports = class Farm_MDL extends Sequelize.Model{
     static init(sequelize) {
         return super.init({
             
@@ -33,8 +33,8 @@ module.exports = class Area_MDL extends Sequelize.Model{
             sequelize,
             timestamps : true,
             underscored: false,
-            modelName  : 'AREA_MDL_CONN',
-            tableName  : 'Area_MDL',
+            modelName  : 'FARM_MDL_CONN',
+            tableName  : 'farm_mdl',
             paranoid   : true,
             charset    : 'utf8',
             collate    : 'utf8_general_ci',

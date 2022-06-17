@@ -1,14 +1,19 @@
 const Sequelize = require('sequelize');
 
-module.exports = class Area_MDL extends Sequelize.Model{
+module.exports = class MD_List extends Sequelize.Model{
     static init(sequelize) {
         return super.init({
             
-            FARM_ID: {
+            MD_ID: {
                 type: Sequelize.STRING(32),
                 allowNull: false,
                 primaryKey: true,
                 unique: true,
+            },
+
+            MD_TYPE: {
+                type: Sequelize.STRING(8),
+                allowNull: true,
             },
 
             USER_ID: {
@@ -16,27 +21,18 @@ module.exports = class Area_MDL extends Sequelize.Model{
                 allowNull: false,
             },
 
-            //위도
-            GPS_LATITUDE: {
-                type: Sequelize.FLOAT,
+            INS_TMST: {
+                type: Sequelize.DATE,
                 allowNull: false,
-            },
-            //경도
-            GPS_LONGITUDE: {
-                type: Sequelize.FLOAT,
-                allowNull: false,
-            },
+                defaultValue: Sequelize.NOW
+            },            
 
-            REMARK: {
-                type: Sequelize.STRING(100),
-                allowNull: true,
-            },
         },{
             sequelize,
             timestamps : true,
             underscored: false,
-            modelName  : 'AREA_MDL_CONN',
-            tableName  : 'Area_MDL',
+            modelName  : 'MD_LIST',
+            tableName  : 'md_list',
             paranoid   : true,
             charset    : 'utf8',
             collate    : 'utf8_general_ci',
