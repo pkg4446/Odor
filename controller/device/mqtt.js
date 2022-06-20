@@ -37,14 +37,18 @@ client.on("message", (topic, message) => {
 
 module.exports = {
     send : async function(device, message){
+        const res = {
+            pass: true,
+            data: 0
+        }
         try {
             //message = "AT+ON"
             const deviceID = "ID=" + device;
             sendMQTT(deviceID, message);
         } catch (error) {
-            
-        }
-        
+            res.pass = false;
+        }        
+        return res;
     },
 }
 
