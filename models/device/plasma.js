@@ -33,7 +33,7 @@ module.exports = class Plasma extends Sequelize.Model{
 
             USER_ID: {
                 type: Sequelize.STRING(32),
-                allowNull: false,
+                allowNull: true,
             },
 
             TMST: {
