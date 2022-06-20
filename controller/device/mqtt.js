@@ -3,11 +3,11 @@ const mqtt      = require("mqtt");
 const plasma    = require("../../models/device/plasma");
 
 const options   = {
-    host:       "smarthive.kr",
+    host:       process.env.host,
     port:       1883,
     protocol:   "mqtt",
-    username:   "hive",
-    password:   "hive",
+    username:   process.env.username,
+    password:   process.env.password,
 };
 
 const client = mqtt.connect(options);
