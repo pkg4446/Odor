@@ -28,11 +28,11 @@ module.exports = class center extends Sequelize.Model{
 
         },{
             sequelize,
-            timestamps : true,
+            timestamps : false,
             underscored: false,
             modelName  : 'Center',
             tableName  : 'center',
-            paranoid   : true,
+            paranoid   : false,
             charset    : 'utf8',
             collate    : 'utf8_general_ci', 
         });

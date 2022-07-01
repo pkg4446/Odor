@@ -44,11 +44,11 @@ module.exports = class Plasma extends Sequelize.Model{
 
         },{
             sequelize,
-            timestamps : true,
+            timestamps : false,
             underscored: false,
             modelName  : 'PLASMA',
             tableName  : 'Plasma',
-            paranoid   : true,
+            paranoid   : false,
             charset    : 'utf8',
             collate    : 'utf8_general_ci',
         });

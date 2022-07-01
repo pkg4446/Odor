@@ -40,25 +40,6 @@ module.exports = class User extends Sequelize.Model{
                 type: Sequelize.TEXT,
                 allowNull: true,
             },
-
-            CREATEDAT: {
-                type: Sequelize.DATE,
-                allowNull: false,
-                defaultValue: Sequelize.NOW
-            },
-
-            UPDATEDAT: {
-                type: Sequelize.DATE,
-                allowNull: false,
-                defaultValue: Sequelize.NOW
-            },
-
-            DELETEDAT: {
-                type: Sequelize.DATE,
-                allowNull: false,
-                defaultValue: Sequelize.NOW
-            },
-
         },{
             sequelize,
             timestamps : true,

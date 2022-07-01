@@ -6,8 +6,8 @@ const options   = {
     host:       process.env.host,
     port:       1883,
     protocol:   "mqtt",
-    username:   process.env.username,
-    password:   process.env.password,
+    username:   process.env.mqttuser,
+    password:   process.env.mqttpass,
 };
 
 const client = mqtt.connect(options);
@@ -15,11 +15,9 @@ client.subscribe("server");
 client.on("error", (error) => {console.log("Can't connect" + error);});
 client.on("connect", () => {console.log("connected: "+ client.connected);});
 
-client.on("message", (topic, message) => {	
+client.on("message", async(topic, message) => {	
     console.log(`토픽:${topic.toString()}, 메세지:${message.toString()}`);
     const device = message.toString().split('=');
-    console.log(device);
-
     try {
         if(device == "ID"){
             const regist = await plasma.findByPk(device[1],{raw: true});
@@ -36,6 +34,20 @@ client.on("message", (topic, message) => {
 //client.end();
 
 module.exports = {
+    extra : async function(data){
+        const res = {
+            pass: true,
+            data: 0
+        }
+        try {
+            console.log(data)
+            sendMQTT(data.TARGET, data.COMMEND);
+        } catch (error) {
+            res.pass = false;
+        }        
+        return res;
+    },
+
     send : async function(device, message){
         const res = {
             pass: true,

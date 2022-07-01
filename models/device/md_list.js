@@ -29,11 +29,11 @@ module.exports = class MD_List extends Sequelize.Model{
 
         },{
             sequelize,
-            timestamps : true,
+            timestamps : false,
             underscored: false,
             modelName  : 'MD_LIST',
             tableName  : 'md_list',
-            paranoid   : true,
+            paranoid   : false,
             charset    : 'utf8',
             collate    : 'utf8_general_ci',
         });

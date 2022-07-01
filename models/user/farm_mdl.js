@@ -31,11 +31,11 @@ module.exports = class Farm_MDL extends Sequelize.Model{
             },
         },{
             sequelize,
-            timestamps : true,
+            timestamps : false,
             underscored: false,
             modelName  : 'FARM_MDL_CONN',
             tableName  : 'farm_mdl',
-            paranoid   : true,
+            paranoid   : false,
             charset    : 'utf8',
             collate    : 'utf8_general_ci',
         });
