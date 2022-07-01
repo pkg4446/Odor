@@ -4,7 +4,7 @@
   "description": "odor_log",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app"
+    "start": "nodemon odor"
   },
   "author": "",
   "license": "ISC",
