@@ -1,0 +1,72 @@
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+    function mqttClent(){
+        axios({
+            url: '/mqtt', // 통신할 웹문서
+            method: 'post', // 통신할 방식
+            data:   { // 인자로 보낼 데이터
+                        TARGET:  document.getElementById('target').value,
+                        COMMEND: document.getElementById('commend').value
+                    }
+        })
+        .then(function (response) {
+            if(response.status == 201){
+                const str = JSON.stringify(response.data)
+                paging(str);
+            }else{
+                $("#response").html(response.data);
+            }
+        });
+
+    }
+
+    function paging(dataSource){
+        $("#response").html(dataSource);
+    };
+
+</script>
+
+<style type="text/css">
+ 
+    table, td{
+        border: 1px solid rgb(255, 255, 255)
+    }
+    
+    table{
+        width:  200px;
+        height: 100px;
+        margin: auto;
+        
+        text-align: center;
+    }
+    
+</style>
+
+<table cellspacing="1">  
+    <thead> 
+        <tr>
+            <div id="response" ></div>
+        </tr>
+        <tr>
+            <th>
+               
+            </th>   
+            <th>
+                
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" id="target" required maxlength="16" size="14" placeholder="Target">
+            </td>   
+            <td>
+                <input type="text" id="commend" required maxlength="16" size="14" placeholder="Commend">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="button" onclick='mqttClent()' value="test" size="14">
+            </td>
+        </tr>
+    </thead>
+</table>
