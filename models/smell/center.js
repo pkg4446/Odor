@@ -20,6 +20,18 @@ module.exports = class center extends Sequelize.Model{
                 allowNull: false,
             },
 
+            WEIGHT: {
+                type: Sequelize.INTEGER.UNSIGNED,
+                allowNull: false,
+                defaultValue: 1
+            },
+
+            STRONG: {
+                type: Sequelize.INTEGER.UNSIGNED,
+                allowNull: false,
+                defaultValue: 1
+            },
+
             TMST: {
                 type: Sequelize.DATE,
                 allowNull: false,
