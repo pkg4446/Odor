@@ -9,7 +9,6 @@ const options   = {
     username:   process.env.mqttuser,
     password:   process.env.mqttpass,
 };
-
 const client = mqtt.connect(options);
 client.subscribe("server");
 client.on("error", (error) => {console.log("Can't connect" + error);});
