@@ -1,4 +1,4 @@
-const Library   = require('../../controller/application/user');
+const Library   = require('../../controller/application/report');
 const { Op }    = require("sequelize");
 
 module.exports  = {
