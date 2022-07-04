@@ -7,8 +7,8 @@ module.exports = {
   center_create : async function(data){
     try {
       const object = await center.create({
-        GPS_LATITUDE:   0,
-        GPS_LONGITUDE:  0,
+        GPS_LATITUDE:   data.GPS_LATITUDE,
+        GPS_LONGITUDE:  data.GPS_LONGITUDE,
       });
       return object;
     } catch (error) {
