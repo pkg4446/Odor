@@ -1,38 +1,12 @@
 const Sequelize = require('sequelize');
 
-module.exports = class Mapping extends Sequelize.Model{
+module.exports = class mapping extends Sequelize.Model{
     static init(sequelize) {
         return super.init({
             IDX: {
                 type: Sequelize.INTEGER.UNSIGNED,
                 primaryKey: true,
                 autoIncrement: true
-            },
-
-            FARM_ID: {
-                type: Sequelize.STRING(32),
-                allowNull: false,
-                unique: true,
-            },
-
-            AMN: {
-                type: Sequelize.SMALLINT.UNSIGNED,
-                allowNull: false,
-            },
-
-            HYD_SLF: {
-                type: Sequelize.SMALLINT.UNSIGNED,
-                allowNull: false,
-            },
-
-            MTHN: {
-                type: Sequelize.SMALLINT.UNSIGNED,
-                allowNull: false,
-            },
-
-            VOCS: {
-                type: Sequelize.SMALLINT.UNSIGNED,
-                allowNull: false,
             },
 
             //위도
@@ -45,6 +19,24 @@ module.exports = class Mapping extends Sequelize.Model{
                 type: Sequelize.FLOAT,
                 allowNull: false,
             },
+
+            WEIGHT: {
+                type: Sequelize.INTEGER.UNSIGNED,
+                allowNull: false,
+                defaultValue: 1
+            },
+
+            STRONG: {
+                type: Sequelize.INTEGER.UNSIGNED,
+                allowNull: false,
+                defaultValue: 1
+            },
+
+            TMST: {
+                type: Sequelize.DATE,
+                allowNull: false,
+                defaultValue: Sequelize.NOW
+            }, 
 
         },{
             sequelize,

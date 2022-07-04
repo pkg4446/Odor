@@ -1,4 +1,4 @@
-const center      = require('../../models/smell/center');
+const mapping      = require('../../models/smell/mapping');
 const contribute  = require('../../models/smell/contribute');
 
 const { Op }      = require("sequelize");
@@ -6,7 +6,7 @@ const { Op }      = require("sequelize");
 module.exports = {
   center_create : async function(data){
     try {
-      const object = await center.create({
+      const object = await mapping.create({
         GPS_LATITUDE:   data.GPS_LATITUDE,
         GPS_LONGITUDE:  data.GPS_LONGITUDE,
       });
@@ -18,7 +18,7 @@ module.exports = {
 
   center_update : async function(data){
     try {
-      const object = await center.update({
+      const object = await mapping.update({
         GPS_LATITUDE:   data.GPS_LATITUDE,
         GPS_LONGITUDE:  data.GPS_LONGITUDE,
         WEIGHT:         data.WEIGHT,
@@ -39,7 +39,7 @@ module.exports = {
     const Y_disitance = Math.abs(radius/1000/111);
 
     try { 
-      const object = await center.findAll({
+      const object = await mapping.findAll({
           where: {
               GPS_LATITUDE:  {[Op.between]: [data.GPS_LATITUDE - X_disitance, data.GPS_LATITUDE + X_disitance]},
               GPS_LONGITUDE: {[Op.between]: [data.GPS_LONGITUDE - Y_disitance, data.GPS_LONGITUDE + Y_disitance]}

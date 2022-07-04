@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-module.exports = class Odor extends Sequelize.Model{
+module.exports = class sensor extends Sequelize.Model{
     static init(sequelize) {
         return super.init({
             
@@ -67,8 +67,8 @@ module.exports = class Odor extends Sequelize.Model{
             sequelize,
             timestamps : false,
             underscored: false,
-            modelName  : 'Odor',
-            tableName  : 'odor',
+            modelName  : 'Sensor',
+            tableName  : 'sensor',
             paranoid   : false,
             charset    : 'utf8',
             collate    : 'utf8_general_ci',

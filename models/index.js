@@ -20,17 +20,13 @@ plasma.init(sequelize);
 md_list.associate(db);
 plasma.associate(db);
 
-
-
-const center        = require('./smell/center');
 const contribute    = require('./smell/contribute');
 const mapping       = require('./smell/mapping');
-const odor          = require('./smell/odor');
+const sensor        = require('./smell/sensor');
 
-db.center           = center;
 db.contribute       = contribute;
 db.mapping          = mapping;
-db.odor             = odor;
+db.sensor           = sensor;
 
 center.init(sequelize);
 contribute.init(sequelize);
