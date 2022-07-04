@@ -20,6 +20,8 @@ plasma.init(sequelize);
 md_list.associate(db);
 plasma.associate(db);
 
+
+
 const contribute    = require('./smell/contribute');
 const mapping       = require('./smell/mapping');
 const sensor        = require('./smell/sensor');
@@ -28,15 +30,13 @@ db.contribute       = contribute;
 db.mapping          = mapping;
 db.sensor           = sensor;
 
-center.init(sequelize);
 contribute.init(sequelize);
 mapping.init(sequelize);
-odor.init(sequelize);
+sensor.init(sequelize);
 
-center.associate(db);
 contribute.associate(db);
 mapping.associate(db);
-odor.associate(db);
+sensor.associate(db);
 
 
 
