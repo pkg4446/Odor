@@ -31,13 +31,6 @@ module.exports = class mapping extends Sequelize.Model{
                 allowNull: false,
                 defaultValue: 1
             },
-
-            TMST: {
-                type: Sequelize.DATE,
-                allowNull: false,
-                defaultValue: Sequelize.NOW
-            }, 
-
         },{
             sequelize,
             timestamps : false,

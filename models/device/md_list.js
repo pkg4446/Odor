@@ -18,15 +18,21 @@ module.exports = class MD_List extends Sequelize.Model{
             },
 
             USER_ID: {
-                type: Sequelize.STRING(32),
+                type: Sequelize.STRING(16),
                 allowNull: false,
+                defaultValue: "null",
+            },
+
+            IP:{
+                type: Sequelize.STRING(32),
+                allowNull: true,
             },
 
             INS_TMST: {
                 type: Sequelize.DATE,
                 allowNull: false,
                 defaultValue: Sequelize.NOW
-            },            
+            },
 
         },{
             sequelize,

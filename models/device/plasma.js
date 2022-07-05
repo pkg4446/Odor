@@ -4,42 +4,23 @@ module.exports = class Plasma extends Sequelize.Model{
     static init(sequelize) {
         return super.init({
             
-            PLSM_ID: {
-                type: Sequelize.STRING(32),
-                allowNull: false,
-                primaryKey: true,
-                unique: true,
-            },
-            //관련 센서모듈 아이디
             MD_ID: {
                 type: Sequelize.STRING(32),
-                allowNull: true,
+                allowNull:  false,
+                primaryKey: true,
+                unique:     true,
             },
             //On, Off
             STATUS: {
                 type: Sequelize.BOOLEAN,
-                allowNull: true,
-            },
-
-            INTERVAR: {
-                type: Sequelize.TINYINT.UNSIGNED,
-                allowNull: true,
-            },
-
-            ONTIME: {
-                type: Sequelize.SMALLINT.UNSIGNED,
-                allowNull: true,
-            },
-
-            USER_ID: {
-                type: Sequelize.STRING(32),
-                allowNull: true,
+                allowNull:      false,
+                defaultValue:   false,
             },
 
             TMST: {
                 type: Sequelize.DATE,
-                allowNull: false,
-                defaultValue: Sequelize.NOW
+                allowNull:      false,
+                defaultValue:   Sequelize.NOW
             },            
 
         },{

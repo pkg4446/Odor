@@ -46,37 +46,26 @@ module.exports = {
           },
           raw : true ,
       });
-      let Center = {
-        IDX:            0,
-        DISTANCE:       0,
-        GPS_LATITUDE:   0,
-        GPS_LONGITUDE:  0,
-        WEIGHT:         0,
-      }
-  
-      if(!object){
-        for(let point of object){
-          const D_X = Math.cos(point.GPS_LATITUDE) * 111 * Math.abs(point.GPS_LONGITUDE - data.GPS_LONGITUDE) * 1000;
-          const D_Y = Math.abs(point.GPS_LATITUDE - data.GPS_LATITUDE) * 111 * 1000;
-          const disitance = Math.sqrt(D_X*D_X + D_Y*D_Y);
-          if(disitance < radius && disitance < Center.DISTANCE){
-            Center.IDX      = point.IDX;
-            Center.DISTANCE = disitance;
-            Center.GPS_LATITUDE   = point.GPS_LATITUDE;
-            Center.GPS_LONGITUDE  = point.GPS_LONGITUDE;
-            Center.WEIGHT         = point.WEIGHT;
-          }
-        }
-      }
-
-      return Center;
+      
+      return object;
     } catch (err) {
     console.error(err);
     next(err);
     }
   },//List
 
-  
+  contribute_create : async function(data){
+    try {
+      const object = await contribute.create({
+        GPS_LATITUDE:   data.GPS_LATITUDE,
+        GPS_LONGITUDE:  data.GPS_LONGITUDE,
+      });
+      return object;
+    } catch (error) {
+      console.error(err);
+    }
+  },
+
   contribute_read : async function(data){
     const radius = 50; //Meter
     const X_disitance = Math.abs(radius/1000/111/Math.cos(data.GPS_LATITUDE));
