@@ -18,14 +18,16 @@ client.on("message", async(topic, message) => {
     console.log(`토픽:${topic.toString()}, 메세지:${message.toString()}`);
     const device = message.toString().split('=');
     try {
-        if(device == "ID"){
-            const regist = await plasma.findByPk(device[1],{raw: true});
-            await plasma.create({
-                PLSM_ID: device[1]
-            });  
-        }      
+        if(device[0] == "ID"){
+            const regist = await plasma.findByPk(device[1],{raw: true});            
+            if(!regist){
+                await plasma.create({
+                    PLSM_ID: device[1]
+                });  
+            }
+        }
     } catch (error) {
-        
+        console.error(error);
     }
     console.log(device);
 });

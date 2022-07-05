@@ -12,8 +12,9 @@ module.exports = class MD_List extends Sequelize.Model{
             },
 
             MD_TYPE: {
-                type: Sequelize.STRING(8),
-                allowNull: true,
+                type: Sequelize.BOOLEAN,
+                allowNull: false,
+                defaultValue: true
             },
 
             USER_ID: {

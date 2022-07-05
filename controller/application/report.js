@@ -1,4 +1,4 @@
-const mapping      = require('../../models/smell/mapping');
+const mapping     = require('../../models/smell/mapping');
 const contribute  = require('../../models/smell/contribute');
 
 const { Op }      = require("sequelize");

@@ -1,18 +1,21 @@
-const mapping     = require('../../models/smell/mapping');
+const sensor      = require('../../models/smell/sensor');
+const moduleList  = require('../../models/device/md_list');
 
 const { Op }      = require("sequelize");
 
 module.exports = {
-  mapping_create : async function(data){
+  create : async function(data){
     try {
-      const object = await mapping.create({
-        FARM_ID:   data.FARM_ID,
-        AMN:   data.AMN,
-        HYD_SLF:   data.HYD_SLF,
-        MTHN:   data.MTHN,
-        VOCS:   data.VOCS,
-        GPS_LATITUDE:   data.GPS_LATITUDE,
-        GPS_LONGITUDE:   data.GPS_LONGITUDE,
+      const object = await sensor.create({
+        MD_ID:    data.MD_ID,
+        TMPR:     data.TMPR,
+        HMDT:     data.HMDT,
+        CD:       data.CD,
+        AMN:      data.AMN,
+        HYD_SLF:  data.HYD_SLF,
+        OZN:      data.OZN,
+        MTHN:     data.MTHN,
+        VOCS:     data.VOCS,
       });
       return object;
     } catch (error) {
@@ -20,16 +23,13 @@ module.exports = {
     }
   },
 
-  mapping_update : async function(data){
+  junction : async function(data){
     try {
-      const object = await mapping.update({
-        GPS_LATITUDE:   data.GPS_LATITUDE,
-        GPS_LONGITUDE:  data.GPS_LONGITUDE,
-        WEIGHT:         data.WEIGHT,
-        STRONG:         data.STRONG,
-        TMST:           new Date(),
-      },{
-        where: {IDX: data.IDX}
+      const object = await sensor.create({
+        MD_ID:    data.MD_ID,
+        MD_TYPE:  data.MD_TYPE,
+        USER_ID:  data.USER_ID,
+        INS_TMST: data.INS_TMST,
       });
       return object;
     } catch (error) {

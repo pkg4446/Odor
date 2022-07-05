@@ -1,5 +1,4 @@
 const Library   = require('../../controller/application/report');
-const { Op }    = require("sequelize");
 
 module.exports  = {
   center_update : async function(data){
