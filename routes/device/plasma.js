@@ -1,21 +1,15 @@
 const express   = require('express');
-const requestIp = require('request-ip');
-const regist    = require('../../controller/device/regist');
+const modules   = require('../../controller/device/modules');
 
 const router  = express.Router();
 
-router.post('/regist',async function(req, res, next) {
-    const data = {
-        IP:     requestIp.getClientIp(req),
-        USERID: req.body.USERID,
-    }      
+router.post('/read',async function(req, res, next) {
     const response = {
         result: true,
         data:   null,
     }
-
     try {
-        response.data = await regist.junction_IP(data);
+        response.data = await modules.plasma_read(req.body.MD_ID);
     } catch (error) {
         response.result = false;
         next(error);
@@ -23,18 +17,37 @@ router.post('/regist',async function(req, res, next) {
     res.json(response);
 });
 
-router.post('/regist',async function(req, res, next) {
-    const data = {
-        IP:     requestIp.getClientIp(req),
-        USERID: req.body.USERID,
-    }      
+router.post('/list',async function(req, res, next) {         
     const response = {
         result: true,
         data:   null,
     }
-
     try {
-        response.data = await regist.junction_IP(data);
+        const data = {
+            MD_TYPE:    true,
+            USERID:     req.body.USERID
+        } 
+        response.data = await modules.list(data);
+    } catch (error) {
+        response.result = false;
+        next(error);
+    }
+    res.json(response);
+});
+
+router.post('/regist',async function(req, res, next) {   
+    const response = {
+        result: true,
+        data:   null,
+    }
+    try {
+        const data = {
+            MD_ID:      req.body.MD_ID,
+            MD_TYPE:    true,
+            USERID:     req.body.USERID
+    
+        }   
+        response.data = await modules.junction_update(data);
     } catch (error) {
         response.result = false;
         next(error);

@@ -1,4 +1,4 @@
-const Library   = require('../../controller/application/report');
+const Library   = require('../controller/application/report');
 
 module.exports  = {
   report : async function(data){

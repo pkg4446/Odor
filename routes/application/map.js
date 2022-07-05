@@ -1,5 +1,5 @@
 const express   = require('express');
-const smell     = require('../../funtion/application/smell');
+const smell     = require('../../funtion/smell');
 const router  = express.Router();
 
 router.route('/')

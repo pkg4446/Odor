@@ -2,19 +2,19 @@ const moduleList  = require('../../models/device/md_list');
 const plasma      = require("../../models/device/plasma");
 
 module.exports = {
-  plasma_read : async function(MD_ID){
+  plasma_read : async function(DEVICE){
     try {
-      const object = await plasma.findByPk(MD_ID,{raw: true}); 
+      const object = await plasma.findByPk(DEVICE,{raw: true}); 
       return object;
     } catch (error) {
       console.error(err);
     }
   },
 
-  plasma_create : async function(MD_ID){
+  plasma_create : async function(DEVICE){
     try {
       const object = await plasma.create({
-        MD_ID:  MD_ID
+        MD_ID:  DEVICE
       });
       return object;
     } catch (error) {
@@ -22,10 +22,10 @@ module.exports = {
     }
   },
 
-  plasma_junction : async function(MD_ID){
+  plasma_junction : async function(DEVICE){
     try {
       const object = await moduleList.create({
-        MD_ID:    MD_ID,
+        MD_ID:    DEVICE,
         MD_TYPE:  true,
       });
       return object;
@@ -53,6 +53,18 @@ module.exports = {
         USER_ID:  data.USER_ID,
       },{
         where: {MD_ID: data.MD_ID, MD_TYPE:data.MD_TYPE}
+      });
+      return object;
+    } catch (error) {
+      console.error(err);
+    }
+  },
+
+  list : async function(data){
+    try {
+      const object = await moduleList.findAll({
+        where:{ USERID: data.USERID, MD_TYPE: data.MD_TYPE },
+        raw:  true,
       });
       return object;
     } catch (error) {
