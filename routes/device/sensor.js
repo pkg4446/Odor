@@ -1,6 +1,6 @@
 const express   = require('express');
 const requestIp = require('request-ip');
-const modules    = require('../../controller/device/modules');
+const devices    = require('../../controller/device/devices');
 const sensor    = require('../../controller/device/sensor');
 
 const router  = express.Router();
@@ -29,7 +29,7 @@ router.post('/list',async function(req, res, next) {
             MD_TYPE:    false,
             USERID:     req.body.USERID
         } 
-        response.data = await modules.list(data);
+        response.data = await devices.list(data);
     } catch (error) {
         response.result = false;
         next(error);
@@ -61,7 +61,7 @@ router.post('/setup',async function(req, res, next) {
             IP:     requestIp.getClientIp(req),
             MD_ID:  req.body.MD_ID,
         } 
-        response.data = await modules.sensor_junction(data);
+        response.data = await devices.sensor_junction(data);
     } catch (error) {
         response.result = false;
         next(error);
@@ -80,7 +80,7 @@ router.post('/reset',async function(req, res, next) {
             MD_TYPE:    false,
             USERID:     "null"
         }       
-        response.data = await modules.junction_update(data);
+        response.data = await devices.junction_update(data);
     } catch (error) {
         response.result = false;
         next(error);
@@ -98,7 +98,7 @@ router.post('/regist',async function(req, res, next) {
             IP:     requestIp.getClientIp(req),
             USERID: req.body.USERID,
         } 
-        response.data = await modules.junction_IP(data);
+        response.data = await devices.junction_IP(data);
     } catch (error) {
         response.result = false;
         next(error);

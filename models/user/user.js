@@ -7,8 +7,7 @@ module.exports = class User extends Sequelize.Model{
             USER_ID: {
                 type: Sequelize.STRING(16),
                 allowNull: false,
-                primaryKey: true,
-                unique: true,
+                primaryKey: true,                
             },
 
             USER_NAME: {
@@ -24,6 +23,7 @@ module.exports = class User extends Sequelize.Model{
             USER_EMAIL: {
                 type: Sequelize.STRING(32),
                 allowNull: false,
+                unique: true,
             },
 
             USER_PHONE: {

@@ -1,5 +1,5 @@
 const express   = require('express');
-const modules   = require('../../controller/device/modules');
+const devices   = require('../../controller/device/devices');
 
 const router  = express.Router();
 
@@ -9,7 +9,7 @@ router.post('/read',async function(req, res, next) {
         data:   null,
     }
     try {
-        response.data = await modules.plasma_read(req.body.MD_ID);
+        response.data = await devices.plasma_read(req.body.MD_ID);
     } catch (error) {
         response.result = false;
         next(error);
@@ -27,7 +27,7 @@ router.post('/list',async function(req, res, next) {
             MD_TYPE:    true,
             USERID:     req.body.USERID
         } 
-        response.data = await modules.list(data);
+        response.data = await devices.list(data);
     } catch (error) {
         response.result = false;
         next(error);
@@ -47,7 +47,7 @@ router.post('/regist',async function(req, res, next) {
             USERID:     req.body.USERID
     
         }   
-        response.data = await modules.junction_update(data);
+        response.data = await devices.junction_update(data);
     } catch (error) {
         response.result = false;
         next(error);

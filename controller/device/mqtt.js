@@ -1,6 +1,6 @@
 const mqtt      = require("mqtt");
 
-const modules    = require("./modules");
+const devices    = require("./devices");
 
 const options   = {
     host:       process.env.host,
@@ -19,10 +19,10 @@ client.on("message", async(topic, message) => {
     const device = message.toString().split('=');
     try {
         if(device[0] == "ID"){
-            const plasma = await modules.plasma_read(device[1]);            
+            const plasma = await devices.plasma_read(device[1]);            
             if(!plasma){
-                await modules.plasma_create(device[1]);
-                await modules.plasma_junction(device[1]);
+                await devices.plasma_create(device[1]);
+                await devices.plasma_junction(device[1]);
             }
         }
     } catch (error) {
