@@ -4,9 +4,7 @@ const User = require('../models/user/user');
 module.exports = {
   info: async function(data){
     try {
-      const hash = await bcrypt.hash(data.USER_PASS, 12);
-      const userInfo = await User.findOne({
-        where: { USER_ID:data.USER_ID, USER_PASS:hash },
+      const userInfo = await User.findByPk(data.USER_ID,{
         attributes: {
           exclude: ['USER_PASS'], // exclude: 제외한 나머지 정보 가져오기
         },
@@ -17,7 +15,7 @@ module.exports = {
     } catch (error) {
       console.error(error);
       return false;
-    }    
+    }
   },
 
   join: async function(data){
@@ -54,7 +52,7 @@ module.exports = {
     try {
       /*
       data = {
-        USER_EMAIL,
+        USER_ID,
         USER_PASS:,
       }
       */
@@ -63,7 +61,7 @@ module.exports = {
         { 
           USER_PASS:  data.USER_NEW_PASS
         },
-        { where: { USER_EMAIL : data.USER_EMAIL }}
+        { where: { USER_ID : data.USER_ID }}
       );
       return true;
     } catch (error) {
@@ -76,25 +74,22 @@ module.exports = {
     try {
       /*
       data = {
-        USER_EMAIL,
+        USER_ID,
         USER_PASS:,
       }
       */
       let passFail = false;
-      await User.findOne({ where: { USER_EMAIL: data.USER_EMAIL } })
+      await User.findByPk(data.USER_ID,{
+        attributes: ['E_NO'],
+        raw : true
+      })
       .then(async function(responce){
         passFail = await bcrypt.compare(data.USER_PASS,responce.USER_PASS);
       });
-      
-      await User.update(
-        { 
-          USER_PASS:  data.USER_PASS
-        },
-        { where: { USER_EMAIL : data.USER_EMAIL }}
-      );
-      return true;
+      return passFail;
     } catch (error) {
       console.error(error);
+      return false;
     }    
   }
 
