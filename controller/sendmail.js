@@ -15,9 +15,9 @@ module.exports = {
     let info = await transporter.sendMail({
       from: `${process.env.NODEMAILER_USER}@naver.com`,
       to: `${user.USER_EMAIL}`,
-      subject: 'EG 비밀번호 변경',
+      subject: '스마트하이브 플라즈마 비밀번호 변경',
       text: 'PassWord Change',
-      html: `<a href="http://localhost:3000/mail/${user.USER_ID}?token=${user.USER_PASS}">비밀번호 변경</a>`,
+      html: `<a href="http://smarthive.kr/mail/${user.USER_ID}?token=${user.USER_PASS}">비밀번호 변경</a>`,
     });
     
     console.log('Message sent: %s', info.messageId);

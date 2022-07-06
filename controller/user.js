@@ -18,6 +18,30 @@ module.exports = {
     }
   },
 
+  IDCheck: async function(ID){
+    try {
+      let passFail = false;
+      const object = await User.findOne({ where: { USER_ID: ID },raw:true});
+      if(object) passFail = true;
+      return passFail;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }    
+  },
+
+  EmailCheck: async function(EMAIL){
+    try {
+      let passFail = false;
+      const object = await User.findOne({ where: { USER_EMAIL: EMAIL },raw:true});
+      if(object) passFail = true;
+      return passFail;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }    
+  },
+
   join: async function(data){
     try {
       /*
@@ -80,7 +104,7 @@ module.exports = {
       */
       let passFail = false;
       await User.findByPk(data.USER_ID,{
-        attributes: ['E_NO'],
+        attributes: ['USER_PASS'],
         raw : true
       })
       .then(async function(responce){
