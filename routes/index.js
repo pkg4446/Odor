@@ -2,17 +2,17 @@ const express       = require('express');
 const router        = express.Router();
 
 const web           = require('./web');
-const map           = require('./application/map');
-const sensor        = require('./device/sensor');
-const plasma        = require('./device/plasma');
 const mqtt          = require('./mqtt');
+
+const device        = require('./device');
+const map           = require('./map');
+const user           = require('./user');
 
 router.use('/',web);
 router.use('/mqtt',mqtt);
 
+router.use('/device',device);
 router.use('/map',map);
-
-router.use('/plasma',plasma);
-router.use('/sensor',sensor);
+router.use('/user',user);
 
 module.exports  = router;
