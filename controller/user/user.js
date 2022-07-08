@@ -83,9 +83,11 @@ module.exports = {
         USER_ADRESS:  data.USER_ADRESS,
         TOKEN:        data.TOKEN
       });
+      await t.commit();
       return true;
     } catch (error) {
       console.error(error);
+      await t.rollback();
       return false;
     }    
   },
