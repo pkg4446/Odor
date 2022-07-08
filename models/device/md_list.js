@@ -17,7 +17,7 @@ module.exports = class MD_List extends Sequelize.Model{
                 defaultValue: true
             },
 
-            USER_ID: {
+            FARM_ID: {
                 type: Sequelize.STRING(16),
                 allowNull: false,
                 defaultValue: "null",

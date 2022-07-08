@@ -50,7 +50,7 @@ module.exports = {
   junction_update : async function(data){
     try {
       const object = await moduleList.update({
-        USER_ID:  data.USER_ID,
+        FARM_ID:  data.FARM_ID,
       },{
         where: {MD_ID: data.MD_ID, MD_TYPE:data.MD_TYPE}
       });
@@ -63,7 +63,7 @@ module.exports = {
   list : async function(data){
     try {
       const object = await moduleList.findAll({
-        where:{ USERID: data.USERID, MD_TYPE: data.MD_TYPE },
+        where:{ FARM_ID: data.FARM_ID, MD_TYPE: data.MD_TYPE },
         raw:  true,
       });
       return object;
@@ -72,11 +72,24 @@ module.exports = {
     }
   },
 
-  sensor_search : async function(IPv4){
+  sensor_read : async function(DEVICE){
     try {
       const object = await moduleList.findAll({
-        where:{ IP: IPv4 },
+        where:{ MD_ID: DEVICE, MD_TYPE: false},
         raw:  true,
+      });
+      return object;
+    } catch (error) {
+      console.error(err);
+    }
+  },
+
+  IP_update : async function(data){
+    try {
+      const object = await moduleList.update({
+        IP:  data.IP,
+      },{
+        where: {MD_ID: data.MD_ID, MD_TYPE: false}
       });
       return object;
     } catch (error) {
@@ -87,9 +100,9 @@ module.exports = {
   junction_IP : async function(data){
     try {
       const object = await moduleList.update({
-        USER_ID:  data.USER_ID,
+        FARM_ID:  data.FARM_ID,
       },{
-        where: {IP: data.IP, USER_ID: "null"}
+        where: {IP: data.IP, FARM_ID: "null"}
       });
       return object;
     } catch (error) {

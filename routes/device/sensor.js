@@ -27,7 +27,7 @@ router.post('/list',async function(req, res, next) {
     try {
         const data = {
             MD_TYPE:    false,
-            USERID:     req.body.USERID
+            FARM_ID:    req.body.FARM_ID
         } 
         response.data = await devices.list(data);
     } catch (error) {
@@ -37,7 +37,7 @@ router.post('/list',async function(req, res, next) {
     res.json(response);
 });
 
-router.post('/log',async function(req, res, next) {
+router.post('/logging',async function(req, res, next) {
     const response = {
         result: true,
         data:   null,
@@ -61,7 +61,12 @@ router.post('/setup',async function(req, res, next) {
             IP:     requestIp.getClientIp(req),
             MD_ID:  req.body.MD_ID,
         } 
-        response.data = await devices.sensor_junction(data);
+        response.data = await devices.sensor_read(data);
+        if(response.data){
+            if(response.data.IP != IP)  response.data = await devices.IP_update(data);
+        }else{
+            response.data = await devices.sensor_junction(data);
+        }
     } catch (error) {
         response.result = false;
         next(error);
@@ -78,7 +83,7 @@ router.post('/reset',async function(req, res, next) {
         const data = {
             MD_ID:      req.body.MD_ID,
             MD_TYPE:    false,
-            USERID:     "null"
+            FARM_ID:    "null"
         }       
         response.data = await devices.junction_update(data);
     } catch (error) {
@@ -95,8 +100,8 @@ router.post('/regist',async function(req, res, next) {
     }
     try {
         const data = {
-            IP:     requestIp.getClientIp(req),
-            USERID: req.body.USERID,
+            IP:         requestIp.getClientIp(req),
+            FARM_ID:    req.body.FARM_ID,
         } 
         response.data = await devices.junction_IP(data);
     } catch (error) {

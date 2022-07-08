@@ -25,7 +25,7 @@ router.post('/list',async function(req, res, next) {
     try {
         const data = {
             MD_TYPE:    true,
-            USERID:     req.body.USERID
+            FARM_ID:    req.body.FARM_ID
         } 
         response.data = await devices.list(data);
     } catch (error) {
@@ -44,8 +44,7 @@ router.post('/regist',async function(req, res, next) {
         const data = {
             MD_ID:      req.body.MD_ID,
             MD_TYPE:    true,
-            USERID:     req.body.USERID
-    
+            FARM_ID:    req.body.FARM_ID    
         }   
         response.data = await devices.junction_update(data);
     } catch (error) {
