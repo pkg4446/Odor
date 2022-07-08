@@ -1,5 +1,8 @@
-const bcrypt = require('bcrypt');
-const User = require('../../models/user/user');
+const bcrypt  = require('bcrypt');
+const User    = require('../../models/user/user');
+const wallet  = require('../../models/user/wallet');
+
+const Sequelize   = require('../module');
 
 module.exports = {
   info: async function(data){
@@ -12,6 +15,16 @@ module.exports = {
       });
       if(!userInfo)return false;
       return userInfo;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  },
+
+  wallet: async function(ID){
+    try {
+      const response = await wallet.findByPk(ID,{raw : true});
+      return response;
     } catch (error) {
       console.error(error);
       return false;
@@ -43,6 +56,7 @@ module.exports = {
   },
 
   join: async function(data){
+    const t = await Sequelize.transaction();
     try {
       /*
       data = {
@@ -55,6 +69,10 @@ module.exports = {
         TOKEN:
       }
       */
+      await wallet.create({
+        USER_ID:    data.USER_ID,
+        Wallet_key: "null",
+      });
       const hash = await bcrypt.hash(data.USER_PASS, 12);
       await User.create({
         USER_ID:      data.USER_ID,

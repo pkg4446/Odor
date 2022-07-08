@@ -5,7 +5,7 @@ module.exports = class Wallet extends Sequelize.Model{
         return super.init({
             
             USER_ID: {
-                type: Sequelize.STRING(32),
+                type: Sequelize.STRING(16),
                 allowNull: false,
                 primaryKey: true,
                 unique: true,
