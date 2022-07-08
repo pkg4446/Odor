@@ -40,23 +40,19 @@ sensor.associate(db);
 
 
 
-const farm_info = require('./user/farm_info');
-const farm_mdl  = require('./user/farm_mdl');
+const farm      = require('./user/farm');
 const user      = require('./user/user');
 const wallet    = require('./user/wallet');
 
-db.farm_info    = farm_info;
-db.farm_mdl     = farm_mdl;
+db.farm         = farm;
 db.user         = user;
 db.wallet       = wallet;
 
-farm_info.init(sequelize);
-farm_mdl.init(sequelize);
+farm.init(sequelize);
 user.init(sequelize);
 wallet.init(sequelize);
 
-farm_info.associate(db);
-farm_mdl.associate(db);
+farm.associate(db);
 user.associate(db);
 wallet.associate(db);
 

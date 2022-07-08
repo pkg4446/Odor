@@ -12,7 +12,7 @@ module.exports = class Farm extends Sequelize.Model{
             },
 
             USER_ID: {
-                type: Sequelize.STRING(32),
+                type: Sequelize.STRING(16),
                 allowNull: false,
             },
 

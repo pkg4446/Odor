@@ -5,6 +5,20 @@ const sensor    = require('../../controller/device/sensor');
 
 const router  = express.Router();
 
+router.post('/log',async function(req, res, next) {
+    const response = {
+        result: true,
+        data:   null,
+    }
+    try {
+        response.data = await sensor.log(req.body);
+    } catch (error) {
+        response.result = false;
+        next(error);
+    }
+    res.json(response);
+});
+
 router.post('/read',async function(req, res, next) {
     const response = {
         result: true,
@@ -30,20 +44,6 @@ router.post('/list',async function(req, res, next) {
             FARM_ID:    req.body.FARM_ID
         } 
         response.data = await devices.list(data);
-    } catch (error) {
-        response.result = false;
-        next(error);
-    }
-    res.json(response);
-});
-
-router.post('/logging',async function(req, res, next) {
-    const response = {
-        result: true,
-        data:   null,
-    }
-    try {
-        response.data = await sensor.log(req.body);
     } catch (error) {
         response.result = false;
         next(error);
