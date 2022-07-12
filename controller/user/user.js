@@ -58,6 +58,8 @@ module.exports = {
   join: async function(data){
     const t = await Sequelize.transaction();
     try {
+      
+      console.log(data);
       /*
       data = {
         USER_ID:,

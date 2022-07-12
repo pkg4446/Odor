@@ -26,25 +26,25 @@ router.post('/login',async function(req, res, next) {
     res.json(response);
 });
 
-router.post('/join',async function(req, res, next) {
+router.post('/join',async function(req, res, next) {    
     const response = {
         result: true,
         data:   null,
     }
     for(const key of Object.keys(req.body)){
-        if(req.body[key]==""){
+        if(!req.body[key]){
+            
+        console.log(req.body[key]);
             response.result = false;
             response.data   = "null";
         }
     }
+    console.log(req.body);
     try {        
-        if(response.data){
-            const pass = await user.passCheck(data);
-            if(pass){            
-                response.data   = await user.info(data);
-            }else{
-                response.result = false;
-            }
+        if(response.result){ 
+            response.data   = await user.join(req.body);   
+        }else{
+            response.result = false;
         }
     } catch (error) {   
         response.result = false; 

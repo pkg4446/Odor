@@ -4,7 +4,7 @@ const plasma      = require("../../models/device/plasma");
 module.exports = {
   plasma_read : async function(DEVICE){
     try {
-      const object = await plasma.findByPk(DEVICE,{raw: true}); 
+      const object = await plasma.findByPk(DEVICE,{attributes: ['STATUS'],raw: true}); 
       return object;
     } catch (error) {
       console.error(err);

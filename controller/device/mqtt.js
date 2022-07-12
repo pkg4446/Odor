@@ -37,7 +37,7 @@ module.exports = {
     extra : async function(data){
         const res = {
             pass: true,
-            data: 0
+            data: null
         }
         try {
             console.log(data)
@@ -51,7 +51,7 @@ module.exports = {
     send : async function(device, message){
         const res = {
             pass: true,
-            data: 0
+            data: null
         }
         try {
             //message = "AT+ON"

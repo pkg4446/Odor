@@ -25,7 +25,6 @@ module.exports = {
     try {
       const object = await farm.update({
         FARM_ID:        data.FARM_ID,
-        USER_ID:        data.USER_ID,
         GPS_LATITUDE:   data.GPS_LATITUDE,
         GPS_LONGITUDE:  data.GPS_LONGITUDE,
         REMARK:         data.REMARK
@@ -39,10 +38,10 @@ module.exports = {
     }
   },
 
-  list : async function(FARMID){
+  list : async function(data){
     try {
       const object = await farm.findAll({
-        where:{ FARM_ID: FARMID},
+        where:{USER_ID:data.USER_ID},
         raw:  true,
       });
       return object;
@@ -52,7 +51,7 @@ module.exports = {
     }
   },
 
-  delete : async function(FARMID){
+  delete : async function(data){
     const t = await Sequelize.transaction();
     let response = false;
     /*
@@ -61,8 +60,8 @@ module.exports = {
     try {
 
       await moduleList.update({FARM_ID: "null"},
-      {where: {FARM_ID:  FARMID}});
-      await farm.destroy({where: {FARM_ID: FARMID}});
+      {where: {FARM_ID:data.FARM_ID, USER_ID:data.USER_ID}});
+      await farm.destroy({where: {FARM_ID:data.FARM_ID, USER_ID:data.USER_ID}});
 
       await t.commit();
       response = true;

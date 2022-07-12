@@ -37,7 +37,7 @@ router.post('/list', async function(req, res, next) {
         data:   null,
     }
     try {        
-        response.data = await farm.list(req.body.FARM_ID);
+        response.data = await farm.list(req.body);
     } catch (error) {   
         response.result = false; 
         next(error);    
@@ -51,7 +51,7 @@ router.post('/remove', async function(req, res, next) {
         data:   null,
     }
     try {        
-        response.result = await farm.delete(req.body.FARM_ID);        
+        response.result = await farm.delete(req.body);        
     } catch (error) {   
         response.result = false; 
         next(error);    
