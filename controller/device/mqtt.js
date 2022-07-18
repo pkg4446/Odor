@@ -24,6 +24,15 @@ client.on("message", async(topic, message) => {
                 await devices.plasma_create(device[1]);
                 await devices.plasma_junction(device[1]);
             }
+            const deviceID = "ID=" + device[1];
+            const now = new Date();
+            console.log(now)
+            sendMQTT(deviceID, `AT+ClockY=${now.getFullYear()}`);
+            sendMQTT(deviceID, `AT+ClockN=${now.getMonth()+1}`);
+            sendMQTT(deviceID, `AT+ClockD=${now.getDate()}`);
+            sendMQTT(deviceID, `AT+ClockH=${now.getHours()}`);
+            sendMQTT(deviceID, `AT+ClockM=${now.getMinutes()}`);
+            sendMQTT(deviceID, `AT+ClockS=${now.getSeconds()}`);
         }
     } catch (error) {
         console.error(error);
