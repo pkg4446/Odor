@@ -3,12 +3,7 @@ const mqtt    = require('../controller/device/mqtt');
 const router  = express.Router();
 
 router.post('/',async function(req,res) {
-        res.json(await mqtt.extra(req.body)); 
-    });
-
-router.post('/plazma',async function(req,res) {
-        ////DeviceID, Commend
-        res.json(await mqtt.send(req.body.DeviceID, req.body.Commend)); 
+        res.json(await mqtt.send(req.body)); 
     });
 
 module.exports = router;

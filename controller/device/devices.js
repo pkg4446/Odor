@@ -1,13 +1,16 @@
 const moduleList  = require('../../models/device/md_list');
 const plasma      = require("../../models/device/plasma");
 
+const Sequelize   = require('../module');
+const { Op }    = require("sequelize");
+
 module.exports = {
   plasma_read : async function(DEVICE){
     try {
-      const object = await plasma.findByPk(DEVICE,{attributes: ['STATUS'],raw: true}); 
+      const object = await plasma.findByPk(DEVICE,{raw: true}); 
       return object;
     } catch (error) {
-      console.error(err);
+      console.error(error);
     }
   },
 
@@ -18,9 +21,37 @@ module.exports = {
       });
       return object;
     } catch (error) {
-      console.error(err);
+      console.error(error);
     }
   },
+
+  plasma_update : async function(DEVICE,COLUMN,VALUE){
+    try {      
+      console.log("plasma_update:",DEVICE,COLUMN,VALUE);
+      const object = await Sequelize.query(`UPDATE plasma SET ${COLUMN}=${VALUE},TMST=now(),WIFI=true WHERE MD_ID='${DEVICE}'`);
+      return object;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
+  plasma_WIFI : async function(){
+    const now   = new Date();
+    console.log(now);
+    now.setDate(now.getDate()-1);
+    console.log(now);
+    try {      
+      const object = await plasma.update({
+        WIFI:false
+      },{
+        where: {TMST:{[Op.gt]: now}}
+      });
+      return object;
+    } catch (error) {
+      console.error(error);
+    }
+  },
+
 
   plasma_junction : async function(DEVICE){
     try {
@@ -30,7 +61,7 @@ module.exports = {
       });
       return object;
     } catch (error) {
-      console.error(err);
+      console.error(error);
     }
   },
   
@@ -43,7 +74,7 @@ module.exports = {
       });
       return object;
     } catch (error) {
-      console.error(err);
+      console.error(error);
     }
   },
 
@@ -56,7 +87,7 @@ module.exports = {
       });
       return object;
     } catch (error) {
-      console.error(err);
+      console.error(error);
     }
   },
 
@@ -68,7 +99,7 @@ module.exports = {
       });
       return object;
     } catch (error) {
-      console.error(err);
+      console.error(error);
     }
   },
 
@@ -80,7 +111,7 @@ module.exports = {
       });
       return object;
     } catch (error) {
-      console.error(err);
+      console.error(error);
     }
   },
 
@@ -93,7 +124,7 @@ module.exports = {
       });
       return object;
     } catch (error) {
-      console.error(err);
+      console.error(error);
     }
   },
 
@@ -106,7 +137,7 @@ module.exports = {
       });
       return object;
     } catch (error) {
-      console.error(err);
+      console.error(error);
     }
   },
  
