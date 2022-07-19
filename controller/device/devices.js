@@ -37,9 +37,7 @@ module.exports = {
 
   plasma_WIFI : async function(){
     const now   = new Date();
-    console.log(now);
     now.setDate(now.getDate()-1);
-    console.log(now);
     try {      
       const object = await plasma.update({
         WIFI:false

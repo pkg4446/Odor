@@ -8,4 +8,8 @@ router.get('/',function(req, res, next) {
     res.sendFile(views + "index.html");
     });
 
+router.get('/device',function(req, res, next) {
+    res.sendFile(views + "plasma.html");
+    });
+
 module.exports = router;
