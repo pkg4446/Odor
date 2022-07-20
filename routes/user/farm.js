@@ -9,7 +9,12 @@ router.post('/regist', async function(req, res, next) {
         data:   null,
     }
     try {        
-        response.data = await farm.create(req.body);
+        if(await farm.check(req.body.FARM_ID)){
+            response.result = false;
+            response.data = "overlap";
+        }else{
+            response.data = await farm.create(req.body);
+        }        
     } catch (error) {   
         response.result = false; 
         next(error);    

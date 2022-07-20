@@ -12,7 +12,7 @@ router.get('/device',function(req, res, next) {
     res.sendFile(views + "plasma.html");
     });
 
-router.get('/adress',function(req, res, next) {
+router.get('/address',function(req, res, next) {
     res.sendFile(views + "kakao.html");
     });
 

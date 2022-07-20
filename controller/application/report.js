@@ -34,10 +34,11 @@ module.exports = {
   },
 
   center_read : async function(data){
-    const radius = 50; //Meter
+    const radius      = data.Diameter; //Meter
     const X_disitance = Math.abs(radius/1000/111/Math.cos(data.GPS_LATITUDE));
     const Y_disitance = Math.abs(radius/1000/111);
-
+    data.GPS_LATITUDE*=1;
+    data.GPS_LONGITUDE*=1;
     try { 
       const object = await mapping.findAll({
           where: {
@@ -46,7 +47,6 @@ module.exports = {
           },
           raw : true ,
       });
-      
       return object;
     } catch (err) {
     console.error(err);
@@ -57,24 +57,26 @@ module.exports = {
   contribute_create : async function(data){
     try {
       const object = await contribute.create({
+        USER_ID:        data.USER_ID,
         GPS_LATITUDE:   data.GPS_LATITUDE,
         GPS_LONGITUDE:  data.GPS_LONGITUDE,
       });
       return object;
     } catch (error) {
-      console.error(err);
+      console.error(error);
     }
   },
 
   contribute_read : async function(data){
-    const radius = 50; //Meter
+    const radius      = data.Diameter; //Meter
     const X_disitance = Math.abs(radius/1000/111/Math.cos(data.GPS_LATITUDE));
     const Y_disitance = Math.abs(radius/1000/111);
+    //data.GPS_LATITUDE*=1;
+    //data.GPS_LONGITUDE*=1;
     const now         = new Date();
     let   validData   = new Date();
     const validDay    = 1;
     validData.setDate(now.getDate()-validDay);
-
     try { 
       const object = await contribute.findAll({
           where: {

@@ -12,17 +12,16 @@ module.exports = class Contribute extends Sequelize.Model{
             USER_ID: {
                 type: Sequelize.STRING(32),
                 allowNull: false,
-                unique: true,
             },
 
             //위도
             GPS_LATITUDE: {
-                type: Sequelize.FLOAT,
+                type: Sequelize.DECIMAL(10,6),
                 allowNull: false,
             },
             //경도
             GPS_LONGITUDE: {
-                type: Sequelize.FLOAT,
+                type: Sequelize.DECIMAL(10,6),
                 allowNull: false,
             },
 

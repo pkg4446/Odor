@@ -123,7 +123,7 @@ module.exports = class Plasma extends Sequelize.Model{
             timestamps : false,
             underscored: false,
             modelName  : 'PLASMA',
-            tableName  : 'Plasma',
+            tableName  : 'plasma',
             paranoid   : false,
             charset    : 'utf8',
             collate    : 'utf8_general_ci',

@@ -11,12 +11,12 @@ module.exports = class mapping extends Sequelize.Model{
 
             //위도
             GPS_LATITUDE: {
-                type: Sequelize.FLOAT,
+                type: Sequelize.DECIMAL(10,6),
                 allowNull: false,
             },
             //경도
             GPS_LONGITUDE: {
-                type: Sequelize.FLOAT,
+                type: Sequelize.DECIMAL(10,6),
                 allowNull: false,
             },
 

@@ -5,6 +5,16 @@ const Sequelize   = require('../module');
 
 module.exports = {
 
+  check : async function(FARM_ID){
+    try {
+      const object = await farm.findByPk(FARM_ID);
+      return object;
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
+  },
+
   create : async function(data){
     try {
       const object = await farm.create({
