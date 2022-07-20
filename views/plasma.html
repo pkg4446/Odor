@@ -1,14 +1,146 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
-    function mqttClent(commend){
+    let DataBase;
+    window.addEventListener('DOMContentLoaded', function(){
+        deviceLoad();
+    });
+    function deviceLoad(){
         axios({
-            url: '/mqtt', // 통신할 웹문서
+            url: '/device/read', // 통신할 웹문서
             method: 'post', // 통신할 방식
             data:   { // 인자로 보낼 데이터
-                        TARGET:  document.getElementById('deviceID').value,
-                        COMMEND: commend
+                        MD_ID:  document.getElementById('deviceID').value,
                     }
+        })
+        .then(function (response) {
+            const object = response.data.data;
+            DataBase = object;
+            if(object){
+                "AT+sTshD=",document.getElementById('ASH').value    = object.A_S_H;
+                "AT+sTsmD=",document.getElementById('ASM').value    = object.A_S_M;
+                "AT+sTehD=",document.getElementById('AEH').value    = object.A_E_H;
+                "AT+sTemD=",document.getElementById('AEM').value    = object.A_E_M;
+                
+                "AT+sTshN=",document.getElementById('PSH').value    = object.P_S_H;
+                "AT+sTsmN=",document.getElementById('PSM').value    = object.P_S_M;
+                "AT+sTehN=",document.getElementById('PEH').value    = object.P_E_H;
+                "AT+sTemN=",document.getElementById('PEM').value    = object.P_E_M;
+                
+                "AT+sTon=" ,document.getElementById('ONTIME').value = object.T_ON;
+                "AT+sToff=",document.getElementById('OFFTIME').value= object.T_OFF;
+                "AT+sTPD=" ,document.getElementById('PUMPD').value  = object.P_D;
+                "AT+sTPR=" ,document.getElementById('PUMPON').value = object.P_T;
+                
+                "AT+CO2="  ,document.getElementById('CO2').value    = object.S_CO2;
+                "AT+NH3="  ,document.getElementById('NH3').value    = object.S_NH3;
+                "AT+H2S="  ,document.getElementById('H2S').value    = object.S_H2S;
+                "AT+Heat=" ,document.getElementById('Heat').value   = object.H_T;
+            }
         });
+        mqttClent("AT+Refresh");
+    }
+
+    function mqttClent(commend){
+        if(commend)
+        {            
+            axios({
+                url: '/mqtt', // 통신할 웹문서
+                method: 'post', // 통신할 방식
+                data:   { // 인자로 보낼 데이터
+                            TARGET:  document.getElementById('deviceID').value,
+                            COMMEND: commend
+                        }
+            });
+        }
+    }
+    function mqttSetClent(commend,value){
+        if(value)
+        {            
+            let compare;     
+            switch (commend) {                   
+                        case "AT+sTshD=":    
+                            compare = DataBase.A_S_H;                  
+                            break;
+                        case "AT+sTsmD=":  
+                            compare = DataBase.A_S_M;                
+                            break;
+                        case "AT+sTehD=":
+                            compare = DataBase.A_E_H;
+                            break;
+                        case "AT+sTemD=":
+                            compare = DataBase.A_E_M;
+                            break;
+                        case "AT+sTshN=": 
+                            compare = DataBase.P_S_H;                       
+                            break;
+                        case "AT+sTsmN=": 
+                            compare = DataBase.P_S_M;                   
+                            break;
+                        case "AT+sTehN=":
+                            compare = DataBase.P_E_H;
+                            break;
+                        case "AT+sTemN=":
+                            compare = DataBase.P_E_M;
+                            break;                
+                        case "AT+sTon=":
+                            compare = DataBase.T_ON;                      
+                            break;
+                        case "AT+sToff=":
+                            compare = DataBase.T_OFF;                   
+                            break;
+                        case "AT+sTPD=":
+                            compare = DataBase.P_D;
+                            break;
+                        case "AT+sTPR=":
+                            compare = DataBase.P_T;
+                            break;
+                        case "AT+CO2=":
+                            compare = DataBase.S_CO2;                  
+                            break;
+                        case "AT+NH3=":
+                            compare = DataBase.S_NH3;                
+                            break;
+                        case "AT+H2S=":
+                            compare = DataBase.S_H2S;
+                            break;
+                        case "AT+Heat=":
+                            compare = DataBase.H_T;
+                            break;
+                        default:
+                            break;
+                    }
+            if(compare != value){
+                axios({
+                    url: '/mqtt', // 통신할 웹문서
+                    method: 'post', // 통신할 방식
+                    data:   { // 인자로 보낼 데이터
+                                TARGET:  document.getElementById('deviceID').value,
+                                COMMEND: commend+value
+                            }
+                });
+            }
+        }
+    }
+    function setClent(){
+        mqttSetClent("AT+sTshD=",document.getElementById('ASH').value);
+        mqttSetClent("AT+sTsmD=",document.getElementById('ASM').value);
+        mqttSetClent("AT+sTehD=",document.getElementById('AEH').value);
+        mqttSetClent("AT+sTemD=",document.getElementById('AEM').value);
+        
+        mqttSetClent("AT+sTshN=",document.getElementById('PSH').value);
+        mqttSetClent("AT+sTsmN=",document.getElementById('PSM').value);
+        mqttSetClent("AT+sTehN=",document.getElementById('PEH').value);
+        mqttSetClent("AT+sTemN=",document.getElementById('PEM').value);
+        
+        mqttSetClent("AT+sTon=" ,document.getElementById('ONTIME').value);
+        mqttSetClent("AT+sToff=",document.getElementById('OFFTIME').value);
+        mqttSetClent("AT+sTPD=" ,document.getElementById('PUMPD').value);
+        mqttSetClent("AT+sTPR=" ,document.getElementById('PUMPON').value);
+        
+        mqttSetClent("AT+CO2="  ,document.getElementById('CO2').value);
+        mqttSetClent("AT+NH3="  ,document.getElementById('NH3').value);
+        mqttSetClent("AT+H2S="  ,document.getElementById('H2S').value);
+        mqttSetClent("AT+Heat=" ,document.getElementById('Heat').value);
     }
 </script>
 
@@ -48,6 +180,7 @@
                         <td>플라즈마 원격 제어기 </td>
                         <td>                
                             장치ID:<input type="text" id="deviceID" required maxlength="18" size="16" value="24:6F:28:1E:04:3C" placeholder="DeviceID" >
+                            <input type="button" onclick='deviceLoad()' value="불러오기" size="14">
                         </td>
                     </tr>
                 </table>
@@ -58,25 +191,157 @@
                 <table cellspacing="1">  
                     <tr>
                         <td>  
-                            <input type="button" onclick='mqttClent("AT+auto")' value="자동" size="14">
-                            <input type="button" onclick='mqttClent("AT+schedule")' value="스케줄" size="14">
-                            <input type="button" onclick='mqttClent("AT+manual");mqttClent("AT+OFF")' value="수동" size="14">
-                                    
-                            <input type="button" onclick='mqttClent("AT+ON")' value="가동" size="14">
-                            <input type="button" onclick='mqttClent("AT+OFF")' value="중지" size="14">    
+                            <table cellspacing="1">  
+                                <tr>
+                                    <td>  
+                                        <table cellspacing="1">  
+                                            <tr>
+                                                <td>  
+                                                    시간설정
+                                                </td>
+                                                <td>  
+                                                    시작시간
+                                                </td>
+                                                <td>  
+                                                    종료시간
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>  
+                                                    오전
+                                                </td>
+                                                <td>    
+                                                    <input type="number" id="ASH" min="0" max="11" placeholder="시"> : 
+                                                    <input type="number" id="ASM" min="0" max="59" placeholder="분">
+                                                </td>
+                                                <td>  
+                                                    <input type="number" id="AEH" min="0" max="11" placeholder="시"> : 
+                                                    <input type="number" id="AEM" min="0" max="59" placeholder="분">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>  
+                                                    오후
+                                                </td>
+                                                <td>    
+                                                    <input type="number" id="PSH" min="0" max="11" placeholder="시"> : 
+                                                    <input type="number" id="PSM" min="0" max="59" placeholder="분">
+                                                </td>
+                                                <td>  
+                                                    <input type="number" id="PEH" min="0" max="11" placeholder="시"> : 
+                                                    <input type="number" id="PEM" min="0" max="59" placeholder="분">
+                                                </td>
+                                            </tr>   
+                                        </table>
+                                     </td>
+                                </tr>
+                                <tr>
+                                    <td>  
+                                        <table cellspacing="1">  
+                                            <tr>
+                                                <td>  
+                                                    ON TIME(분)
+                                                </td>
+                                                <td>  
+                                                    OFF TIME(분)
+                                                </td>
+                                                <td>  
+                                                    펌프지연시간(분)
+                                                </td>
+                                                <td>  
+                                                    펌프동작시간(분)
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>                                                      
+                                                    <input type="number" id="ONTIME" min="0" max="250" placeholder="분">
+                                                </td>
+                                                <td>                                                      
+                                                    <input type="number" id="OFFTIME" min="0" max="250" placeholder="분">
+                                                </td>
+                                                <td>                                                      
+                                                    <input type="number" id="PUMPD" min="0" max="250" placeholder="분">
+                                                </td>
+                                                <td>                                                      
+                                                    <input type="number" id="PUMPON" min="0" max="250" placeholder="분">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>  
+                                        <table cellspacing="1">  
+                                            <tr>
+                                                <td rowspan="2">  
+                                                    자동 설정값
+                                                </td>
+                                                <td>  
+                                                    이산화탄소
+                                                </td>
+                                                <td>  
+                                                    암모니아
+                                                </td>
+                                                <td>  
+                                                    황화수소
+                                                </td>
+                                                <td>  
+                                                    히터온도
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>                                                      
+                                                    <input type="number" id="CO2" min="0" max="250" placeholder="분">
+                                                </td>
+                                                <td>                                                      
+                                                    <input type="number" id="NH3" min="0" max="250" placeholder="분">
+                                                </td>
+                                                <td>                                                      
+                                                    <input type="number" id="H2S" min="0" max="250" placeholder="분">
+                                                </td>
+                                                <td>                                                      
+                                                    <input type="number" id="Heat" min="0" max="250" placeholder="분">
+                                                </td>
+                                            </tr>                                              
+                                        </table>
+                                    </td>
+                                </tr>   
+                            </table> 
+                        </td>
+                        <td>
+                            <input type="button" onclick='setClent()' value="설
+정
+버
+튼" style="width:30pt;height:80%;">                            
+                        </td>
+                        <td>
+                            <table cellspacing="1">  
+                                <tr>
+                                    <td>  
+                                        <input type="button" onclick='mqttClent("AT+auto")' value="자동" size="14">
+                                     </td>
+                                </tr>
+                                <tr>
+                                    <td>  
+                                        <input type="button" onclick='mqttClent("AT+schedule")' value="스케줄" size="14">
+                                     </td>
+                                </tr>
+                                <tr>
+                                    <td>  
+                                        <input type="button" onclick='mqttClent("AT+manual");mqttClent("AT+OFF")' value="수동" size="14">
+                                     </td>
+                                </tr>   
+                                <tr>
+                                    <td>
+                                        <input type="button" onclick='mqttClent("AT+ON")' value="가동" size="14">
+                                        <input type="button" onclick='mqttClent("AT+OFF")' value="중지" size="14">    
+                                    </td>
+                                </tr>
+                            </table> 
                         </td>
                     </tr>
-                </table>                
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <input type="text" required maxlength="20" size="16" placeholder="Commend">
-            </td>   
-        </tr>
-        <tr>
-            <td>
-                <input type="button" onclick='mqttClent("Commend")' value="test" size="14">
+                </table>  
+                               
             </td>
         </tr>
     </thead>

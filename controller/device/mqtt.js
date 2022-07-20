@@ -128,7 +128,6 @@ module.exports = {
         try {
             console.log(data)
             sendMQTT(data.TARGET, data.COMMEND);
-            sendMQTT(data.TARGET, "AT+Refresh");
         } catch (error) {
             res.pass = false;
         }        
