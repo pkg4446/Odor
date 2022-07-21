@@ -36,8 +36,7 @@
                 "AT+H2S="  ,document.getElementById('H2S').value    = object.S_H2S;
                 "AT+Heat=" ,document.getElementById('Heat').value   = object.H_T;
             }
-        });
-        mqttClent("AT+Refresh");
+        });        
     }
 
     function mqttClent(commend){
@@ -142,6 +141,7 @@
         mqttSetClent("AT+NH3="  ,document.getElementById('NH3').value);
         mqttSetClent("AT+H2S="  ,document.getElementById('H2S').value);
         mqttSetClent("AT+Heat=" ,document.getElementById('Heat').value);
+        mqttClent("AT+Refresh");
     }
 </script>
 
