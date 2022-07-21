@@ -16,7 +16,7 @@
             const object = response.data.data;
             DataBase = object;
             if(object){
-                document.getElementById('TimeStemp').innerHTML   = "- 마지막 접속시간 : "+object.TMST;
+                document.getElementById('TimeStemp').innerHTML   = "- 마지막 접속시간 : " + new Date(object.TMST);
 
                 document.getElementById('ASH').value        = object.A_S_H;
                 document.getElementById('ASM').value        = object.A_S_M;
