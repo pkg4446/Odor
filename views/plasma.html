@@ -16,25 +16,27 @@
             const object = response.data.data;
             DataBase = object;
             if(object){
-                "AT+sTshD=",document.getElementById('ASH').value    = object.A_S_H;
-                "AT+sTsmD=",document.getElementById('ASM').value    = object.A_S_M;
-                "AT+sTehD=",document.getElementById('AEH').value    = object.A_E_H;
-                "AT+sTemD=",document.getElementById('AEM').value    = object.A_E_M;
+                document.getElementById('TimeStemp').innerHTML   = "- 마지막 접속시간 : "+object.TMST;
+
+                document.getElementById('ASH').value        = object.A_S_H;
+                document.getElementById('ASM').value        = object.A_S_M;
+                document.getElementById('AEH').value        = object.A_E_H;
+                document.getElementById('AEM').value        = object.A_E_M;
                 
-                "AT+sTshN=",document.getElementById('PSH').value    = object.P_S_H;
-                "AT+sTsmN=",document.getElementById('PSM').value    = object.P_S_M;
-                "AT+sTehN=",document.getElementById('PEH').value    = object.P_E_H;
-                "AT+sTemN=",document.getElementById('PEM').value    = object.P_E_M;
+                document.getElementById('PSH').value        = object.P_S_H;
+                document.getElementById('PSM').value        = object.P_S_M;
+                document.getElementById('PEH').value        = object.P_E_H;
+                document.getElementById('PEM').value        = object.P_E_M;
                 
-                "AT+sTon=" ,document.getElementById('ONTIME').value = object.T_ON;
-                "AT+sToff=",document.getElementById('OFFTIME').value= object.T_OFF;
-                "AT+sTPD=" ,document.getElementById('PUMPD').value  = object.P_D;
-                "AT+sTPR=" ,document.getElementById('PUMPON').value = object.P_T;
+                document.getElementById('ONTIME').value     = object.T_ON;
+                document.getElementById('OFFTIME').value    = object.T_OFF;
+                document.getElementById('PUMPD').value      = object.P_D;
+                document.getElementById('PUMPON').value     = object.P_T;
                 
-                "AT+CO2="  ,document.getElementById('CO2').value    = object.S_CO2;
-                "AT+NH3="  ,document.getElementById('NH3').value    = object.S_NH3;
-                "AT+H2S="  ,document.getElementById('H2S').value    = object.S_H2S;
-                "AT+Heat=" ,document.getElementById('Heat').value   = object.H_T;
+                document.getElementById('CO2').value        = object.S_CO2;
+                document.getElementById('NH3').value        = object.S_NH3;
+                document.getElementById('H2S').value        = object.S_H2S;
+                document.getElementById('Heat').value       = object.H_T;
             }
         });        
     }
@@ -178,9 +180,12 @@
             <th>
                 <table cellspacing="1">  
                     <tr>
-                        <td>플라즈마 원격 제어기 </td>
-                        <td>                
-                            장치ID:<input type="text" id="deviceID" required maxlength="18" size="16" value="24:6F:28:1E:04:3C" placeholder="DeviceID" >
+                        <td>    
+                            플라즈마 원격 제어기 &nbsp;&nbsp;
+                            <spanid id="TimeStemp"></spanid>
+                        </td>
+                        <td>                        
+                            장치ID:<input type="text" id="deviceID" required maxlength="18" size="16" value="24:6F:28:1E:04:3C" placeholder="장치 ID" >
                             <input type="button" onclick='deviceLoad()' value="불러오기" size="14">
                         </td>
                     </tr>
@@ -316,7 +321,17 @@
 튼" style="width:30pt;height:80%;">                            
                         </td>
                         <td>
-                            <table cellspacing="1">  
+                            <table cellspacing="1"> 
+                                <tr>
+                                    <td>  
+                                        <input type="button" onclick='mqttClent("AT+door")' value="문열기" size="14">
+                                     </td>
+                                </tr>
+                                <tr>
+                                    <td>  
+                                        -------
+                                     </td>
+                                </tr> 
                                 <tr>
                                     <td>  
                                         <input type="button" onclick='mqttClent("AT+auto")' value="자동" size="14">
