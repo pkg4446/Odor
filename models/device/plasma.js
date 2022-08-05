@@ -11,11 +11,21 @@ module.exports = class Plasma extends Sequelize.Model{
                 unique:     true,
             },
             //On, Off
-            STATUS: {
+            STATUS_R: {
                 type: Sequelize.BOOLEAN,
                 allowNull:      false,
                 defaultValue:   false,
-            },            
+            },
+            STATUS_F: {
+                type: Sequelize.BOOLEAN,
+                allowNull:      false,
+                defaultValue:   false,
+            },       
+            STATUS_H: {
+                type: Sequelize.BOOLEAN,
+                allowNull:      false,
+                defaultValue:   false,
+            },                   
             WIFI: {
                 type: Sequelize.BOOLEAN,
                 allowNull:      false,

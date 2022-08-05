@@ -26,33 +26,24 @@ client.on("message", async(topic, message) => {
                 await devices.plasma_create(device[1]);
                 await devices.plasma_junction(device[1]);
             }else{
-                await devices.plasma_update(device[1],"METHOD",2);
-                await devices.plasma_update(device[1],"STATUS",true);
+                await devices.plasma_update(device[1],"STATUS_R",true);
+                await devices.plasma_update(device[1],"STATUS_F",false);
+                await devices.plasma_update(device[1],"STATUS_H",false);
             }
         }else{
             const plasma = await devices.plasma_read(device[0]);
-            if(plasma){           
-                switch (device[1]) {
-                    case "AT+ON":
-                        await devices.plasma_update(device[0],"STATUS",true);
-                        break;
-                    case "AT+OFF":
-                        await devices.plasma_update(device[0],"STATUS",false);
-                        break;
-                    case "AT+auto":                        
-                        await devices.plasma_update(device[0],"METHOD",1);
-                        break;
-                    case "AT+schedule":                        
-                        await devices.plasma_update(device[0],"METHOD",2);
-                        break;
-                    case "AT+manual":                    
-                        await devices.plasma_update(device[0],"METHOD",3);
-                        break;
-                    default:
-                        break;
-                }
+            if(plasma){
                 if(device[2]){
-                    switch (device[1]) {                   
+                    switch (device[1]) {     
+                        case "AT+RUN":                        
+                            await devices.plasma_update(device[0],"STATUS_R",device[2]);
+                            break;
+                        case "AT+FAN":                        
+                            await devices.plasma_update(device[0],"STATUS_F",device[2]);
+                            break;  
+                        case "AT+HEAT":                        
+                            await devices.plasma_update(device[0],"STATUS_H",device[2]);
+                            break;            
                         case "AT+sTshD":                        
                             await devices.plasma_update(device[0],"A_S_H",device[2]);
                             break;

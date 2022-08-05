@@ -324,7 +324,7 @@
                             <table cellspacing="1"> 
                                 <tr>
                                     <td>  
-                                        <input type="button" onclick='mqttClent("AT+door")' value="문열기" size="14">
+                                        <input type="button" onclick='mqttClent("AT+Door")' value="문열기" size="14">
                                      </td>
                                 </tr>
                                 <tr>
@@ -334,23 +334,20 @@
                                 </tr> 
                                 <tr>
                                     <td>  
-                                        <input type="button" onclick='mqttClent("AT+auto")' value="자동" size="14">
+                                        <input type="button" onclick='mqttClent("AT+FAN=1")' value="송풍" size="14">
+                                        <input type="button" onclick='mqttClent("AT+FAN=0")' value="중지" size="14">
                                      </td>
                                 </tr>
                                 <tr>
                                     <td>  
-                                        <input type="button" onclick='mqttClent("AT+schedule")' value="스케줄" size="14">
-                                     </td>
-                                </tr>
-                                <tr>
-                                    <td>  
-                                        <input type="button" onclick='mqttClent("AT+manual");mqttClent("AT+OFF")' value="수동" size="14">
-                                     </td>
+                                        <input type="button" onclick='mqttClent("AT+HEAT=1");mqttClent("AT+OFF")' value="히터" size="14">
+                                        <input type="button" onclick='mqttClent("AT+HEAT=0");mqttClent("AT+OFF")' value="중지" size="14">
+                                    </td>
                                 </tr>   
                                 <tr>
                                     <td>
-                                        <input type="button" onclick='mqttClent("AT+ON")' value="가동" size="14">
-                                        <input type="button" onclick='mqttClent("AT+OFF")' value="중지" size="14">    
+                                        <input type="button" onclick='mqttClent("AT+RUN=1")' value="가동" size="14">
+                                        <input type="button" onclick='mqttClent("AT+RUN=0")' value="중지" size="14">    
                                     </td>
                                 </tr>
                             </table> 
