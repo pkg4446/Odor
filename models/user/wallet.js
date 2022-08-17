@@ -11,8 +11,13 @@ module.exports = class Wallet extends Sequelize.Model{
                 unique: true,
             },
 
-            Wallet_key: {
-                type: Sequelize.TEXT,
+            Private_key: {
+                type: Sequelize.STRING(64),
+                allowNull: false,
+            },
+
+            Public_key: {
+                type: Sequelize.STRING(130),
                 allowNull: false,
             },
 
