@@ -14,14 +14,14 @@
                 const str = JSON.stringify(response.data)
                 paging(str);
             }else{
-                $("#response").html(response.data);
+                document.getElementById("response").innerHTML = response;
             }
         });
 
     }
 
     function paging(dataSource){
-        $("#response").html(dataSource);
+        document.getElementById("response").innerHTML = dataSource;
     };
 
 </script>
