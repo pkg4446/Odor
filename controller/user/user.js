@@ -1,4 +1,5 @@
 const bcrypt  = require('bcrypt');
+const { update } = require('../../models/user/user');
 const User    = require('../../models/user/user');
 const wallet  = require('../../models/user/wallet');
 
@@ -24,6 +25,28 @@ module.exports = {
   wallet: async function(ID){
     try {
       const response = await wallet.findByPk(ID,{raw : true});
+      return response;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  },
+
+  walletUpdate: async function(data){
+    try {
+      let response = false;
+      await wallet.findByPk(data.USER_ID)
+      .then(async function(res) {
+        response = {
+          Private_key:  data.Private_key,
+          Public_key:   data.Public_key
+        }
+        res.update({
+          Private_key:  data.Private_key,
+          Public_key:   data.Public_key
+        });        
+      });
+      
       return response;
     } catch (error) {
       console.error(error);
@@ -72,8 +95,9 @@ module.exports = {
       }
       */
       await wallet.create({
-        USER_ID:    data.USER_ID,
-        Wallet_key: "null",
+        USER_ID:      data.USER_ID,
+        Private_key:  "null",
+        Public_key:   "null",
       });
       const hash = await bcrypt.hash(data.USER_PASS, 12);
       await User.create({
