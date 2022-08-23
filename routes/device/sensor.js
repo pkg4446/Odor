@@ -11,6 +11,16 @@ router.post('/log',async function(req, res, next) {
         data:   null,
     }
     try {
+        const data = {
+            IP:     requestIp.getClientIp(req),
+            MD_ID:  req.body.MD_ID,
+        } 
+        const device = await devices.sensor_read(data);
+        if(device){
+            if(device.IP != IP) await devices.IP_update(data);
+        }else{
+            await devices.sensor_junction(data);
+        }        
         response.data = await sensor.log(req.body);
     } catch (error) {
         response.result = false;
@@ -57,16 +67,7 @@ router.post('/setup',async function(req, res, next) {
         data:   null,
     }
     try {
-        const data = {
-            IP:     requestIp.getClientIp(req),
-            MD_ID:  req.body.MD_ID,
-        } 
-        response.data = await devices.sensor_read(data);
-        if(response.data){
-            if(response.data.IP != IP)  response.data = await devices.IP_update(data);
-        }else{
-            response.data = await devices.sensor_junction(data);
-        }
+        
     } catch (error) {
         response.result = false;
         next(error);

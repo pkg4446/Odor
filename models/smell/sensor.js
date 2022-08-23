@@ -21,42 +21,42 @@ module.exports = class sensor extends Sequelize.Model{
                 defaultValue: Sequelize.NOW
             },
             //측정값들
-
+            //온도
             TMPR: {
                 type: Sequelize.SMALLINT.UNSIGNED,
                 allowNull: false,
             },
-
+            //습도
             HMDT: {
                 type: Sequelize.SMALLINT.UNSIGNED,
                 allowNull: false,
             },
-
+            //일산화탄소
             CD: {  ////Carbon Dioxide
                 type: Sequelize.SMALLINT.UNSIGNED,
                 allowNull: false,
             },
-
+            //암모니아
             AMN: {
                 type: Sequelize.SMALLINT.UNSIGNED,
                 allowNull: false,
             },
-
+            //황화수소
             HYD_SLF: {
                 type: Sequelize.SMALLINT.UNSIGNED,
                 allowNull: false,
             },
-
-            OZN: {
+            //이산화탄소
+            CO2: {
                 type: Sequelize.SMALLINT.UNSIGNED,
                 allowNull: false,
             },
-
+            //메탄
             MTHN: {
                 type: Sequelize.SMALLINT.UNSIGNED,
                 allowNull: false,
             },
-
+            //
             VOCS: {
                 type: Sequelize.SMALLINT.UNSIGNED,
                 allowNull: false,

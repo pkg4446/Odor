@@ -10,7 +10,7 @@ module.exports = {
         CD:       data.CD,
         AMN:      data.AMN,
         HYD_SLF:  data.HYD_SLF,
-        OZN:      data.OZN,
+        CO2:      data.OZN,
         MTHN:     data.MTHN,
         VOCS:     data.VOCS,
       });
