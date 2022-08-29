@@ -28,28 +28,12 @@ module.exports = {
   plasma_update : async function(DEVICE,COLUMN,VALUE){
     try {      
       console.log("plasma_update:",DEVICE,COLUMN,VALUE);
-      const object = await Sequelize.query(`UPDATE plasma SET ${COLUMN}=${VALUE},TMST=now(),WIFI=true WHERE MD_ID='${DEVICE}'`);
+      const object = await Sequelize.query(`UPDATE plasma SET ${COLUMN}=${VALUE},TMST=now() WHERE MD_ID='${DEVICE}'`);
       return object;
     } catch (error) {
       console.error(error);
     }
   },
-
-  plasma_WIFI : async function(){
-    const now   = new Date();
-    now.setDate(now.getDate()-1);
-    try {      
-      const object = await plasma.update({
-        WIFI:false
-      },{
-        where: {TMST:{[Op.gt]: now}}
-      });
-      return object;
-    } catch (error) {
-      console.error(error);
-    }
-  },
-
 
   plasma_junction : async function(DEVICE){
     try {

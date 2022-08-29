@@ -106,7 +106,6 @@ client.on("message", async(topic, message) => {
 
 timeRefresh = setInterval(async function() {
     sendTIME("serverTime"); 
-    await devices.plasma_WIFI();
 }, 1000*60*60);
 
 

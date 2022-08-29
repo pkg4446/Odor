@@ -86,7 +86,7 @@ module.exports = class Plasma extends Sequelize.Model{
             },
             //꺼져있는 시간(분) //T_ON, T_OFF 주기로 작동시간동안 반복. ex)T_ON=8, T_OFF=2 //8분 작동 2분 휴식 반복.
             T_OFF: {
-                type: Sequelize.TINYINT.UNSIGNED,
+                type: Sequelize.SMALLINT.UNSIGNED,
                 allowNull:      false,
                 defaultValue:   false,
             },
