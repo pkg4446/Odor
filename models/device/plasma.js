@@ -80,7 +80,7 @@ module.exports = class Plasma extends Sequelize.Model{
             },
             //켜져있는 시간(분)
             T_ON: {
-                type: Sequelize.TINYINT.UNSIGNED,
+                type: Sequelize.SMALLINT.UNSIGNED,
                 allowNull:      false,
                 defaultValue:   false,
             },
