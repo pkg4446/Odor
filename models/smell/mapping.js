@@ -8,7 +8,12 @@ module.exports = class mapping extends Sequelize.Model{
                 primaryKey: true,
                 autoIncrement: true
             },
-
+            //투고:0, 센서:1
+            TYPE: {
+                type: Sequelize.BOOLEAN,
+                primaryKey: true,
+                autoIncrement: true
+            },
             //위도
             GPS_LATITUDE: {
                 type: Sequelize.DECIMAL(10,6),
