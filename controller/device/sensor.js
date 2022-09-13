@@ -20,6 +20,19 @@ module.exports = {
     }
   },
 
+  readOne : async function(DEVICE){
+    try {
+      const object = await sensor.findOne({
+        where:{ MD_ID: DEVICE },
+        raw:  true,
+        order :[['MESURE_DT', 'DESC']],
+      });
+      return object;
+    } catch (error) {
+      console.error(err);
+    }
+  },
+
   read : async function(DEVICE){
     try {
       const object = await sensor.findAll({

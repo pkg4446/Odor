@@ -29,6 +29,20 @@ router.post('/log',async function(req, res, next) {
     res.json(response);
 });
 
+router.post('/recent',async function(req, res, next) {
+    const response = {
+        result: true,
+        data:   null,
+    }
+    try {
+        response.data = await sensor.readOne(req.body.MD_ID);
+    } catch (error) {
+        response.result = false;
+        next(error);
+    }
+    res.json(response);
+});
+
 router.post('/read',async function(req, res, next) {
     const response = {
         result: true,
