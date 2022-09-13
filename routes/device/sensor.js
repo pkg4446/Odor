@@ -108,7 +108,7 @@ router.post('/reset',async function(req, res, next) {
     res.json(response);
 });
 
-router.post('/regist',async function(req, res, next) {         
+router.post('/regist',async function(req, res, next) {      
     const response = {
         result: true,
         data:   null,
