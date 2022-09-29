@@ -21,8 +21,6 @@ router.post('/log',async function(req, res, next) {
         }else{
             await devices.sensor_junction(data);
         }        
-        
-        console.log("req.body",req.body);
         response.data = await sensor.log(req.body);
     } catch (error) {
         response.result = false;
