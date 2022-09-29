@@ -5,7 +5,7 @@ const sensor    = require('../../controller/device/sensor');
 
 const router  = express.Router();
 
-router.post('/log',async function(req, res, next) {
+router.post('/log',async function(req, res, next) {    
     const response = {
         result: true,
         data:   null,
@@ -15,12 +15,14 @@ router.post('/log',async function(req, res, next) {
             IP:     requestIp.getClientIp(req),
             MD_ID:  req.body.MD_ID,
         } 
-        const device = await devices.sensor_read(data);
+        const device = await devices.sensor_read(data.MD_ID);
         if(device){
-            if(device.IP != IP) await devices.IP_update(data);
+            if(device.IP != data.IP) await devices.IP_update(data);
         }else{
             await devices.sensor_junction(data);
         }        
+        
+        console.log("req.body",req.body);
         response.data = await sensor.log(req.body);
     } catch (error) {
         response.result = false;
