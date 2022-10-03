@@ -11,6 +11,47 @@ router.post('/log',async function(req, res, next) {
         data:   null,
     }
     try {
+        const DATA      = req.body;
+        DATA.TMPR       *= 1;
+        DATA.HMDT       *= 1;
+        DATA.CD         *= 1;
+        DATA.AMN        *= 1;
+        DATA.HYD_SLF    *= 1;
+        DATA.OZN        *= 1;
+        DATA.MTHN       *= 1;
+        DATA.VOCS       *= 1;
+
+        axiosData = {
+            token:    "safemotion",
+            macAdd:   DATA.MD_ID,
+            TMPR:     DATA.TMPR,
+            HMDT:     DATA.HMDT,
+            CD:       DATA.CD,
+            AMN:      DATA.AMN,
+            HYD_SLF:  DATA.HYD_SLF,
+            CO2:      DATA.OZN,
+            MTHN:     DATA.MTHN,
+            VOCS:     DATA.VOCS,
+          }
+      
+          console.log(axiosData);
+      
+          const axios = require('axios');
+
+          await axios({
+            headers: {
+              'Content-Type': 'application/json; charset=utf-8',
+            },
+            method: "post", // 요청 방식
+            url: "https://plasmaapi.smarthive.work/api/daesung/sensor/", // 요청 주소
+            data: axiosData,
+          })
+          .then(function(res){
+            response.data = res.data;
+            console.log(res);
+          });
+          
+/*
         const data = {
             IP:     requestIp.getClientIp(req),
             MD_ID:  req.body.MD_ID,
@@ -22,6 +63,7 @@ router.post('/log',async function(req, res, next) {
             await devices.sensor_junction(data);
         }        
         response.data = await sensor.log(req.body);
+*/
     } catch (error) {
         response.result = false;
         next(error);
