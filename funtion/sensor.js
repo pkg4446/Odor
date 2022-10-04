@@ -22,8 +22,8 @@ function format(value){
 }
 
 async function weather(GPS_LATITUDE,GPS_LONGITUDE){
-  GPS_LATITUDE  = 55;
-  GPS_LONGITUDE = 127;
+  //GPS_LATITUDE  = 55;
+  //GPS_LONGITUDE = 127;
   const axios = require('axios');
   const today = new Date();
   const now   = `${today.getFullYear()}${format(today.getMonth()+1)}${format(today.getDate())}`; 
