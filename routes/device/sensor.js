@@ -48,7 +48,7 @@ router.post('/log',async function(req, res, next) {
           })
           .then(function(res){
             response.data = res.data;
-            console.log(res);
+            console.log(response);
           });
           
 /*
