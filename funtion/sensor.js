@@ -102,10 +102,11 @@ async function weather(GPS_LATITUDE,GPS_LONGITUDE){
 
 function area(data){
   const condition = {
-    small:    data.Small,
-    day:      data.Day,//sun(condition.day), strong, moderate, slight //cloud(night) >1/2>
-    wind:     data.Wind,//<2,3,5,6<
-    distance: data.Distance,
+    small:      data.Small,
+    day:        data.Day,//sun(condition.day), strong, moderate, slight //cloud(night) >1/2>
+    wind:       data.Wind,//<2,3,5,6<
+    distance:   data.Distance,
+    distanceY:  data.distanceY
   }
   let grade;
 
@@ -163,8 +164,7 @@ function area(data){
       break;
   }
 
-  let distanceY = 0;
-  let small = condition.small/(Math.PI*deviationY*deviationZ*condition.small)*Math.exp(-Math.pow(-(distanceY/deviationY),2)/2);
+  let small = condition.small/(Math.PI*deviationY*deviationZ*condition.small)*Math.exp(-Math.pow(-(condition.distanceY/deviationY),2)/2);
 
   return small;
 }
