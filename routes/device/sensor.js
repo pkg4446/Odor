@@ -32,7 +32,7 @@ router.post('/log',async function(req, res, next) {
             CO2:      DATA.OZN,
             MTHN:     DATA.MTHN,
             VOCS:     DATA.VOCS,
-            IP:       requestIp.getClientIp(req),
+            ip:       requestIp.getClientIp(req),
           }
       
           console.log(axiosData);
