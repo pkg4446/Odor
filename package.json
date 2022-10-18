@@ -19,8 +19,10 @@
     "mqtt": "^4.3.7",
     "mysql2": "^2.3.3",
     "nodemailer": "^6.7.6",
-    "nodemon": "^2.0.19",
     "request-ip": "^3.0.2",
     "sequelize": "^6.20.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
