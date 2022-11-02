@@ -43,14 +43,14 @@ async function weather(GPS_LATITUDE,GPS_LONGITUDE){
   const weatherData = {
     GPS_LATITUDE:   GPS_LATITUDE,
     GPS_LONGITUDE:  GPS_LONGITUDE,
-    PTY:  null,
-    REH:  null,
-    RN1:  null,
-    T1H:  null,
-    UUU:  null,
-    VEC:  null,
-    VVV:  null,
-    WSD:  null
+    PTY:  null, //강수 형태
+    REH:  null, //습도 %
+    RN1:  null, //시간당 강수량 mm
+    T1H:  null, //섭씨 기온
+    UUU:  null, //동서바랑성분
+    VEC:  null, //풍향
+    VVV:  null, //남북바람성분
+    WSD:  null  //풍속 m/s
   }
 
   await axios({
